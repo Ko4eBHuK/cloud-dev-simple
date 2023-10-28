@@ -1,17 +1,14 @@
-# Start with a base image containing Java runtime
-FROM amazoncorretto:17-alpine-jdk
+FROM openjdk:17-jdk-slim
+ARG JAR_FILE=build/libs/*.jar
 
-# Create a directory
+RUN apt-get update && apt-get install -y wget
+
+RUN mkdir -p ~/.postgresql && \
+    wget "https://storage.yandexcloud.net/cloud-certs/CA.pem" \
+    --output-document ~/.postgresql/root.crt && \
+    chmod 0600 ~/.postgresql/root.crt
+
 WORKDIR /app
-
-# Copy all the files from the current directory to the image
-COPY . .
-
-# build the project avoiding tests
-RUN ./gradlew clean build -x test
-
-# Expose port 8080
+COPY ${JAR_FILE} app.jar
 EXPOSE 8080
-
-# Run the jar file
-CMD ["java", "-jar", "./build/libs/cloud-dev-okladnikov-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "app.jar"]
