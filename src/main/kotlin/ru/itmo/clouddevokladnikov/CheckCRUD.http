@@ -1,11 +1,10 @@
 ### GetPrograms
-http://localhost:8080/
+https://d5doeunjjg3l7bqajnth.apigw.yandexcloud.net
 
 ### ProceedNewProgram
-POST http://localhost:8080/
+POST https://d5doeunjjg3l7bqajnth.apigw.yandexcloud.net
 Content-Type: application/json
 
 {
   "sourceCode": "idea request source code"
 }
-
