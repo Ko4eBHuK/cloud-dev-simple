@@ -1,5 +1,5 @@
 FROM openjdk:17-jdk-slim
-ARG JAR_FILE=build/libs/*.jar
+ARG JAR_FILE=build/libs/cloud-dev-okladnikov-0.0.1-SNAPSHOT.jar
 
 RUN apt-get update && apt-get install -y wget
 
